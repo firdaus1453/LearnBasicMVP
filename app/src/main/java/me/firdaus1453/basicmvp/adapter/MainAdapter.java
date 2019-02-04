@@ -1,6 +1,8 @@
 package me.firdaus1453.basicmvp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.firdaus1453.basicmvp.R;
 import me.firdaus1453.basicmvp.model.UserData;
+import me.firdaus1453.basicmvp.utils.Constants;
+import me.firdaus1453.basicmvp.view.DetailActivity;
 
 /**
  * Created by firdaus1453 on 2/4/2019.
@@ -47,6 +51,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         RequestOptions options = new RequestOptions().error(R.drawable.ic_broken_image).placeholder(R.drawable.ic_broken_image);
 
         Glide.with(context).load(userData.getAvatar()).apply(options).into(holder.imgAvatar);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mengirim data menggunakan bundle
+                // Buat object bundle
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.KEY_ID,userData.getId());
+
+                // Berpindah halaman dengan membawa data
+                context.startActivity(new Intent(context, DetailActivity.class).putExtras(bundle));
+            }
+        });
     }
 
     @Override

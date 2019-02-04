@@ -2,11 +2,13 @@ package me.firdaus1453.basicmvp.network;
 
 import me.firdaus1453.basicmvp.model.LoginBody;
 import me.firdaus1453.basicmvp.model.LoginResponse;
+import me.firdaus1453.basicmvp.model.SingleUserResponse;
 import me.firdaus1453.basicmvp.model.UserResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -22,4 +24,7 @@ public interface ApiInterface {
     @GET("api/users")
     Call<UserResponse> getDataUser(@Query("per_page") int perPage);
 
+    // Membuat endpoint untuk get data single user
+    @GET("api/users/{id}")
+    Call<SingleUserResponse> getDataSingleUser(@Path("id") int id);
 }
